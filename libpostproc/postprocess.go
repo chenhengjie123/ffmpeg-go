@@ -1,6 +1,6 @@
 package libpostproc
 
-import "github.com/moonfdd/ffmpeg-go/ffcommon"
+import "github.com/chenhengjie123/ffmpeg-go/ffcommon"
 
 /*
  * Copyright (C) 2001-2003 Michael Niedermayer (michaelni@gmx.at)

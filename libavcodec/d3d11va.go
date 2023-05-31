@@ -3,7 +3,7 @@ package libavcodec
 import (
 	"unsafe"
 
-	"github.com/moonfdd/ffmpeg-go/ffcommon"
+	"github.com/chenhengjie123/ffmpeg-go/ffcommon"
 )
 
 /*

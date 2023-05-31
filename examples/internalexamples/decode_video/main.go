@@ -5,9 +5,9 @@ import (
 	"os"
 	"unsafe"
 
-	"github.com/moonfdd/ffmpeg-go/ffcommon"
-	"github.com/moonfdd/ffmpeg-go/libavcodec"
-	"github.com/moonfdd/ffmpeg-go/libavutil"
+	"github.com/chenhengjie123/ffmpeg-go/ffcommon"
+	"github.com/chenhengjie123/ffmpeg-go/libavcodec"
+	"github.com/chenhengjie123/ffmpeg-go/libavutil"
 )
 
 func main0() (ret ffcommon.FInt) {
@@ -24,6 +24,9 @@ func main0() (ret ffcommon.FInt) {
 	var data *ffcommon.FUint8T
 	var data_size ffcommon.FSizeT
 	var pkt *libavcodec.AVPacket
+
+	ffcommon.SetAvcodecPath("/usr/local/ffmpeg/lib/libavcodec.dylib")
+	ffcommon.SetAvutilPath("/usr/local/ffmpeg/lib/libavutil.dylib")
 
 	if len(os.Args) <= 2 {
 		fmt.Printf("Usage: %s <input file> <output file>\nAnd check your input file is encoded by mpeg1video please.\n", os.Args[0])

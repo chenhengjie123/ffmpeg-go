@@ -7,10 +7,10 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/moonfdd/ffmpeg-go/ffcommon"
-	"github.com/moonfdd/ffmpeg-go/libavcodec"
-	"github.com/moonfdd/ffmpeg-go/libavformat"
-	"github.com/moonfdd/ffmpeg-go/libavutil"
+	"github.com/chenhengjie123/ffmpeg-go/ffcommon"
+	"github.com/chenhengjie123/ffmpeg-go/libavcodec"
+	"github.com/chenhengjie123/ffmpeg-go/libavformat"
+	"github.com/chenhengjie123/ffmpeg-go/libavutil"
 )
 
 func main0() (ret ffcommon.FInt) {

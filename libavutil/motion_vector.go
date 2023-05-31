@@ -1,6 +1,6 @@
 package libavutil
 
-import "github.com/moonfdd/ffmpeg-go/ffcommon"
+import "github.com/chenhengjie123/ffmpeg-go/ffcommon"
 
 /*
  * This file is part of FFmpeg.

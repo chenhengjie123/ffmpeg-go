@@ -5,10 +5,10 @@ import (
 	"os"
 	"unsafe"
 
-	"github.com/moonfdd/ffmpeg-go/ffcommon"
-	"github.com/moonfdd/ffmpeg-go/libavcodec"
-	"github.com/moonfdd/ffmpeg-go/libavformat"
-	"github.com/moonfdd/ffmpeg-go/libavutil"
+	"github.com/chenhengjie123/ffmpeg-go/ffcommon"
+	"github.com/chenhengjie123/ffmpeg-go/libavcodec"
+	"github.com/chenhengjie123/ffmpeg-go/libavformat"
+	"github.com/chenhengjie123/ffmpeg-go/libavutil"
 )
 
 // go run ./examples/internalexamples/demuxing_decoding/main.go ./resources/big_buck_bunny.mp4 ./out/big_buck_bunny.yuv ./out/big_buck_bunny.pcm

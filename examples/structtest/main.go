@@ -3,14 +3,15 @@ package main
 import "C"
 import (
 	"fmt"
-	"github.com/moonfdd/ffmpeg-go/libavcodec"
-	"github.com/moonfdd/ffmpeg-go/libavdevice"
-	"github.com/moonfdd/ffmpeg-go/libavfilter"
-	"github.com/moonfdd/ffmpeg-go/libavformat"
-	"github.com/moonfdd/ffmpeg-go/libavutil"
-	"github.com/moonfdd/ffmpeg-go/libswscale"
 	"reflect"
 	"unsafe"
+
+	"github.com/chenhengjie123/ffmpeg-go/libavcodec"
+	"github.com/chenhengjie123/ffmpeg-go/libavdevice"
+	"github.com/chenhengjie123/ffmpeg-go/libavfilter"
+	"github.com/chenhengjie123/ffmpeg-go/libavformat"
+	"github.com/chenhengjie123/ffmpeg-go/libavutil"
+	"github.com/chenhengjie123/ffmpeg-go/libswscale"
 )
 
 //https://blog.csdn.net/u010824081/article/details/79427676

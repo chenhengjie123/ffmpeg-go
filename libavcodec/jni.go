@@ -1,6 +1,6 @@
 package libavcodec
 
-import "github.com/moonfdd/ffmpeg-go/ffcommon"
+import "github.com/chenhengjie123/ffmpeg-go/ffcommon"
 
 /*
  * JNI public API functions

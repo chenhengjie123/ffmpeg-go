@@ -3,8 +3,8 @@ package libswresample
 import (
 	"unsafe"
 
-	"github.com/moonfdd/ffmpeg-go/ffcommon"
-	"github.com/moonfdd/ffmpeg-go/libavutil"
+	"github.com/chenhengjie123/ffmpeg-go/ffcommon"
+	"github.com/chenhengjie123/ffmpeg-go/libavutil"
 )
 
 /*

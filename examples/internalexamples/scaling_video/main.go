@@ -5,9 +5,9 @@ import (
 	"os"
 	"unsafe"
 
-	"github.com/moonfdd/ffmpeg-go/ffcommon"
-	"github.com/moonfdd/ffmpeg-go/libavutil"
-	"github.com/moonfdd/ffmpeg-go/libswscale"
+	"github.com/chenhengjie123/ffmpeg-go/ffcommon"
+	"github.com/chenhengjie123/ffmpeg-go/libavutil"
+	"github.com/chenhengjie123/ffmpeg-go/libswscale"
 )
 
 func main0() (ret ffcommon.FInt) {
