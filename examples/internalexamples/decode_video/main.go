@@ -25,15 +25,14 @@ func main0() (ret ffcommon.FInt) {
 	var data_size ffcommon.FSizeT
 	var pkt *libavcodec.AVPacket
 
-	ffcommon.SetAvcodecPath("/usr/local/ffmpeg/lib/libavcodec.dylib")
-	ffcommon.SetAvutilPath("/usr/local/ffmpeg/lib/libavutil.dylib")
-
-	if len(os.Args) <= 2 {
-		fmt.Printf("Usage: %s <input file> <output file>\nAnd check your input file is encoded by mpeg1video please.\n", os.Args[0])
-		os.Exit(0)
-	}
-	filename = os.Args[1]
-	outfilename = os.Args[2]
+	// if len(os.Args) <= 2 {
+	// 	fmt.Printf("Usage: %s <input file> <output file>\nAnd check your input file is encoded by mpeg1video please.\n", os.Args[0])
+	// 	os.Exit(0)
+	// }
+	// filename = os.Args[1]
+	// outfilename = os.Args[2]
+	filename = "/Users/chenhengjie/Downloads/dumpHw.h264"
+	outfilename = "/Users/chenhengjie/Documents/Projects/质效改进组/qa_repos/tmp/ffmpeg-go/out/ppm/big_buck_bunny.yuv"
 
 	pkt = libavcodec.AvPacketAlloc()
 	if pkt == nil {
@@ -44,7 +43,7 @@ func main0() (ret ffcommon.FInt) {
 	//memset(inbuf + INBUF_SIZE, 0, AV_INPUT_BUFFER_PADDING_SIZE);
 
 	/* find the MPEG-1 video decoder */
-	codec = libavcodec.AvcodecFindDecoder(libavcodec.AV_CODEC_ID_MPEG1VIDEO)
+	codec = libavcodec.AvcodecFindDecoder(libavcodec.AV_CODEC_ID_H264)
 	if codec == nil {
 		fmt.Printf("Codec not found\n")
 		os.Exit(1)
@@ -181,14 +180,23 @@ func decode(dec_ctx *libavcodec.AVCodecContext, frame *libavutil.AVFrame, pkt *l
 
 func main() {
 	os.Setenv("Path", os.Getenv("Path")+";./lib")
-	ffcommon.SetAvutilPath("./lib/avutil-56.dll")
-	ffcommon.SetAvcodecPath("./lib/avcodec-58.dll")
-	ffcommon.SetAvdevicePath("./lib/avdevice-58.dll")
-	ffcommon.SetAvfilterPath("./lib/avfilter-56.dll")
-	ffcommon.SetAvformatPath("./lib/avformat-58.dll")
-	ffcommon.SetAvpostprocPath("./lib/postproc-55.dll")
-	ffcommon.SetAvswresamplePath("./lib/swresample-3.dll")
-	ffcommon.SetAvswscalePath("./lib/swscale-5.dll")
+	// ffcommon.SetAvutilPath("./lib/avutil-56.dll")
+	// ffcommon.SetAvcodecPath("./lib/avcodec-58.dll")
+	// ffcommon.SetAvdevicePath("./lib/avdevice-58.dll")
+	// ffcommon.SetAvfilterPath("./lib/avfilter-56.dll")
+	// ffcommon.SetAvformatPath("./lib/avformat-58.dll")
+	// ffcommon.SetAvpostprocPath("./lib/postproc-55.dll")
+	// ffcommon.SetAvswresamplePath("./lib/swresample-3.dll")
+	// ffcommon.SetAvswscalePath("./lib/swscale-5.dll")
+
+	ffcommon.SetAvcodecPath("/usr/local/ffmpeg/lib/libavcodec.dylib")
+	ffcommon.SetAvutilPath("/usr/local/ffmpeg/lib/libavutil.dylib")
+	ffcommon.SetAvdevicePath("/usr/local/ffmpeg/lib/libavdevice.dylib")
+	ffcommon.SetAvfilterPath("/usr/local/ffmpeg/lib/libavfilter.dylib")
+	ffcommon.SetAvformatPath("/usr/local/ffmpeg/lib/libavformat.dylib")
+	ffcommon.SetAvpostprocPath("/usr/local/ffmpeg/lib/libpostproc.dylib")
+	ffcommon.SetAvswresamplePath("/usr/local/ffmpeg/lib/libswresample.dylib")
+	ffcommon.SetAvswscalePath("/usr/local/ffmpeg/lib/libswscale.dylib")
 
 	genDir := "./out"
 	_, err := os.Stat(genDir)

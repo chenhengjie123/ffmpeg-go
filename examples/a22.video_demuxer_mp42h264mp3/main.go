@@ -48,14 +48,14 @@ func open_codec_context(streamIndex *ffcommon.FInt, ofmtCtx **libavformat.AVForm
 
 func main() {
 	os.Setenv("Path", os.Getenv("Path")+";./lib")
-	ffcommon.SetAvutilPath("./lib/avutil-56.dll")
-	ffcommon.SetAvcodecPath("./lib/avcodec-58.dll")
-	ffcommon.SetAvdevicePath("./lib/avdevice-58.dll")
-	ffcommon.SetAvfilterPath("./lib/avfilter-56.dll")
-	ffcommon.SetAvformatPath("./lib/avformat-58.dll")
-	ffcommon.SetAvpostprocPath("./lib/postproc-55.dll")
-	ffcommon.SetAvswresamplePath("./lib/swresample-3.dll")
-	ffcommon.SetAvswscalePath("./lib/swscale-5.dll")
+	ffcommon.SetAvcodecPath("/usr/local/ffmpeg/lib/libavcodec.dylib")
+	ffcommon.SetAvutilPath("/usr/local/ffmpeg/lib/libavutil.dylib")
+	ffcommon.SetAvdevicePath("/usr/local/ffmpeg/lib/libavdevice.dylib")
+	ffcommon.SetAvfilterPath("/usr/local/ffmpeg/lib/libavfilter.dylib")
+	ffcommon.SetAvformatPath("/usr/local/ffmpeg/lib/libavformat.dylib")
+	ffcommon.SetAvpostprocPath("/usr/local/ffmpeg/lib/libpostproc.dylib")
+	ffcommon.SetAvswresamplePath("/usr/local/ffmpeg/lib/libswresample.dylib")
+	ffcommon.SetAvswscalePath("/usr/local/ffmpeg/lib/libswscale.dylib")
 
 	genDir := "./out"
 	_, err := os.Stat(genDir)
@@ -213,12 +213,12 @@ func main() {
 	ofmtCtxAudio.AvformatFreeContext()
 	fmt.Println("-----------------------------------------")
 	go func() {
-		_, err = exec.Command("./lib/ffplay.exe", outFilenameAudio).Output()
+		_, err = exec.Command("/usr/local/ffmpeg/bin/ffplay", outFilenameAudio).Output()
 		if err != nil {
 			fmt.Println("play err = ", err)
 		}
 	}()
-	_, err = exec.Command("./lib/ffplay.exe", outFilenameVideo).Output()
+	_, err = exec.Command("/usr/local/ffmpeg/bin/ffplay", outFilenameVideo).Output()
 	if err != nil {
 		fmt.Println("play err = ", err)
 	}
