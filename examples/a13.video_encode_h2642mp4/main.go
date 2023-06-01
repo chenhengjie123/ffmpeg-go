@@ -13,14 +13,14 @@ import (
 
 func main() {
 	os.Setenv("Path", os.Getenv("Path")+";./lib")
-	ffcommon.SetAvcodecPath("/usr/local/ffmpeg/lib/libavcodec.dylib")
-	ffcommon.SetAvutilPath("/usr/local/ffmpeg/lib/libavutil.dylib")
-	ffcommon.SetAvdevicePath("/usr/local/ffmpeg/lib/libavdevice.dylib")
-	ffcommon.SetAvfilterPath("/usr/local/ffmpeg/lib/libavfilter.dylib")
-	ffcommon.SetAvformatPath("/usr/local/ffmpeg/lib/libavformat.dylib")
-	ffcommon.SetAvpostprocPath("/usr/local/ffmpeg/lib/libpostproc.dylib")
-	ffcommon.SetAvswresamplePath("/usr/local/ffmpeg/lib/libswresample.dylib")
-	ffcommon.SetAvswscalePath("/usr/local/ffmpeg/lib/libswscale.dylib")
+	ffcommon.SetAvcodecPath("./lib_mac/libavcodec.dylib")
+	ffcommon.SetAvutilPath("./lib_mac/libavutil.dylib")
+	ffcommon.SetAvdevicePath("./lib_mac/libavdevice.dylib")
+	ffcommon.SetAvfilterPath("./lib_mac/libavfilter.dylib")
+	ffcommon.SetAvformatPath("./lib_mac/libavformat.dylib")
+	ffcommon.SetAvpostprocPath("./lib_mac/libpostproc.dylib")
+	ffcommon.SetAvswresamplePath("./lib_mac/libswresample.dylib")
+	ffcommon.SetAvswscalePath("./lib_mac/libswscale.dylib")
 
 	genDir := "./out"
 	_, err := os.Stat(genDir)
@@ -193,7 +193,7 @@ func main() {
 	// outFmtCtx.Pb.AvioClose()//案例里面有，但个人感觉不对
 
 	fmt.Println("-----------------------------------------")
-	_, err = exec.Command("/usr/local/ffmpeg/bin/ffplay", "./out/result.mp4").Output()
+	_, err = exec.Command("./lib_mac/ffplay", "./out/result.mp4").Output()
 	if err != nil {
 		fmt.Println("play err = ", err)
 	}

@@ -224,14 +224,14 @@ func avcodec_save_video_file(pFormatCtx *libavformat.AVFormatContext, streamInde
 
 func main() {
 	os.Setenv("Path", os.Getenv("Path")+";./lib")
-	ffcommon.SetAvcodecPath("/usr/local/ffmpeg/lib/libavcodec.dylib")
-	ffcommon.SetAvutilPath("/usr/local/ffmpeg/lib/libavutil.dylib")
-	ffcommon.SetAvdevicePath("/usr/local/ffmpeg/lib/libavdevice.dylib")
-	ffcommon.SetAvfilterPath("/usr/local/ffmpeg/lib/libavfilter.dylib")
-	ffcommon.SetAvformatPath("/usr/local/ffmpeg/lib/libavformat.dylib")
-	ffcommon.SetAvpostprocPath("/usr/local/ffmpeg/lib/libpostproc.dylib")
-	ffcommon.SetAvswresamplePath("/usr/local/ffmpeg/lib/libswresample.dylib")
-	ffcommon.SetAvswscalePath("/usr/local/ffmpeg/lib/libswscale.dylib")
+	ffcommon.SetAvcodecPath("./lib_mac/libavcodec.dylib")
+	ffcommon.SetAvutilPath("./lib_mac/libavutil.dylib")
+	ffcommon.SetAvdevicePath("./lib_mac/libavdevice.dylib")
+	ffcommon.SetAvfilterPath("./lib_mac/libavfilter.dylib")
+	ffcommon.SetAvformatPath("./lib_mac/libavformat.dylib")
+	ffcommon.SetAvpostprocPath("./lib_mac/libpostproc.dylib")
+	ffcommon.SetAvswresamplePath("./lib_mac/libswresample.dylib")
+	ffcommon.SetAvswscalePath("./lib_mac/libswscale.dylib")
 
 	genDir := "./out"
 	_, err := os.Stat(genDir)
@@ -305,12 +305,12 @@ func main() {
 
 	fmt.Println("-----------------------------------------")
 	go func() {
-		_, err = exec.Command("/usr/local/ffmpeg/bin/ffplay", "-ar", "22050", "-ac", "1", "-f", "s16le", "-i", outAudioFile).Output()
+		_, err = exec.Command("./lib_mac/ffplay", "-ar", "22050", "-ac", "1", "-f", "s16le", "-i", outAudioFile).Output()
 		if err != nil {
 			fmt.Println("play err = ", err)
 		}
 	}()
-	_, err = exec.Command("/usr/local/ffmpeg/bin/ffplay", "-video_size", "640*360", "-i", outVideoFile).Output()
+	_, err = exec.Command("./lib_mac/ffplay", "-video_size", "640*360", "-i", outVideoFile).Output()
 	if err != nil {
 		fmt.Println("play err = ", err)
 	}
