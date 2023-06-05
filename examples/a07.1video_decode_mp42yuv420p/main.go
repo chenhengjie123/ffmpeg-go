@@ -14,14 +14,14 @@ import (
 
 func main() {
 	os.Setenv("Path", os.Getenv("Path")+";./lib")
-	ffcommon.SetAvcodecPath("./lib_mac/libavcodec.dylib")
-	ffcommon.SetAvutilPath("./lib_mac/libavutil.dylib")
-	ffcommon.SetAvdevicePath("./lib_mac/libavdevice.dylib")
-	ffcommon.SetAvfilterPath("./lib_mac/libavfilter.dylib")
-	ffcommon.SetAvformatPath("./lib_mac/libavformat.dylib")
-	ffcommon.SetAvpostprocPath("./lib_mac/libpostproc.dylib")
-	ffcommon.SetAvswresamplePath("./lib_mac/libswresample.dylib")
-	ffcommon.SetAvswscalePath("./lib_mac/libswscale.dylib")
+	ffcommon.SetAvcodecPath("/usr/local/ffmpeg/lib/libavcodec.dylib")
+	ffcommon.SetAvutilPath("/usr/local/ffmpeg/lib/libavutil.dylib")
+	ffcommon.SetAvdevicePath("/usr/local/ffmpeg/lib/libavdevice.dylib")
+	ffcommon.SetAvfilterPath("/usr/local/ffmpeg/lib/libavfilter.dylib")
+	ffcommon.SetAvformatPath("/usr/local/ffmpeg/lib/libavformat.dylib")
+	ffcommon.SetAvpostprocPath("/usr/local/ffmpeg/lib/libpostproc.dylib")
+	ffcommon.SetAvswresamplePath("/usr/local/ffmpeg/lib/libswresample.dylib")
+	ffcommon.SetAvswscalePath("/usr/local/ffmpeg/lib/libswscale.dylib")
 
 	genDir := "./out"
 	_, err := os.Stat(genDir)
@@ -31,9 +31,11 @@ func main() {
 		}
 	}
 
-	filePath := "./resources/big_buck_bunny.mp4" //文件地址
-	videoStreamIndex := -1                       //视频流所在流序列中的索引
-	ret := int32(0)                              //默认返回值
+	// filePath := "/Users/chenhengjie/Documents/Projects/质效改进组/qa_repos/tmp/ffmpeg-go/resources/dumpHw.h264" //文件地址
+	filePath := "/Users/chenhengjie/Documents/Projects/质效改进组/qa_repos/tmp/ffmpeg-go/resources/tmp.h264" //文件地址
+
+	videoStreamIndex := -1 //视频流所在流序列中的索引
+	ret := int32(0)        //默认返回值
 
 	//需要的变量名并初始化
 	var fmtCtx *libavformat.AVFormatContext
@@ -119,6 +121,17 @@ func main() {
 		//===========================  读取视频信息 ===============================//
 		for fmtCtx.AvReadFrame(pkt) >= 0 { //读取的是一帧视频  数据存入一个AVPacket的结构中
 			if pkt.StreamIndex == uint32(videoStreamIndex) {
+				data := PointerToBytes(unsafe.Pointer(pkt.Data), int(pkt.Size))
+				// fmt.Println("data = ", data)
+
+				for i := 4; i < len(data); i++ {
+					// fmt.Println("data[i-4] = ", data[i-4], "data[i-3] = ", data[i-3], "data[i-2] = ", data[i-2], "data[i-1] = ", data[i-1], "data[i] = ", data[i])
+					if data[i-4] == 0x00 && data[i-3] == 0x00 && data[i-2] == 0x00 && data[i-1] == 0x01 {
+						nalUnitType := data[i] & 31
+						fmt.Println("nalUnitType = ", nalUnitType)
+					}
+				}
+
 				if codecCtx.AvcodecSendPacket(pkt) == 0 {
 					for codecCtx.AvcodecReceiveFrame(yuvFrame) == 0 {
 						i++
@@ -159,8 +172,17 @@ func main() {
 	fmtCtx.AvformatFreeContext()
 	libavutil.AvFrameFree(&yuvFrame)
 
-	_, err = exec.Command("./lib_mac/ffplay", "-pixel_format", "yuv420p", "-video_size", "640x360", "./out/result.yuv").Output()
+	_, err = exec.Command("/usr/local/ffmpeg/bin/ffplay", "-pixel_format", "yuv420p", "-video_size", "640x360", "./out/result.yuv").Output()
 	if err != nil {
 		fmt.Println("play err = ", err)
 	}
+}
+
+// PointerToBytes 函数接收一个指向内存地址的指针和一个长度参数，将指针指向的内存地址中的数据转换为字节切片并返回
+func PointerToBytes(pointer unsafe.Pointer, size int) []byte {
+	// 将指针转换为一个 byte 类型的指针
+	byteArrayPointer := (*[1 << 30]byte)(pointer)
+	// 从 byte 数组中获取对应长度的数据
+	bytes := byteArrayPointer[:size]
+	return bytes
 }
